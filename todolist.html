@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div class="jeden">
+        <p>Todo list practice 1</p>
+        <input type="text" name="" class="todoName" placeholder="Todo name">
+        <input type="date" class="todoDate">
+        <button onclick="dodajTodoList();renderTodo()">Add</button>
+        <div class="todo"></div>
+    </div>
+
+    <script>
+
+        const todoList = [
+            {name:'nic'},
+            {date: '2023-11-13'}
+            
+        ]
+        renderTodo();
+
+        function renderTodo() {
+            let todoListHTML = '';
+            for (let i = 0; i < todoList.length; i++) {
+                const todo = todoList.name;
+                const date = todoList.date;
+                const html = `<p> ${todo+date}</p>`
+                todoListHTML += html;
+            }
+            document.querySelector('.todo').innerHTML = todoListHTML;
+        }
+        function dodajTodoList() {
+            const inputTodo = document.querySelector('.todoName');
+            const inputDate = document.querySelector('.todoDate');
+            const dateTodo = inputDate.value; 
+            const nameTodo = inputTodo.value;
+            todoList.name.push(nameTodo);
+            todoList.date.push(dateTodo);
+
+            console.log(todoList);
+            inputTodo.value = '';
+
+
+        }
+        for (let i = 0; i < todoList.length; i++) {
+            console.log(todoList[i]);
+        }
+        renderTodo();
+
+        // const nums = [1, 4, 4];
+        // let total = 0;
+        // for (let i = 0; i < nums.length; i++) {
+        //     total += nums[i];
+        // }
+        // console.log(total);
+
+        // let numsDoubled = [];
+
+        // for (let i = 0; i < nums.length; i++) {
+        //     const num = nums[i];
+        //     numsDoubled.push(num * 2);
+        // }
+        // console.log(numsDoubled);
+
+
+    </script>
+
+
+</body>
+
+</html>
