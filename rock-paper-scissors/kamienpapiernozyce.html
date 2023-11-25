@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            font-family: Arial;
+            font-size: 20px;
+            background-color: black;
+            color: white;
+        }
+
+        .wynik-obrazkowy {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .wynik-obrazkowy>img {
+            height: 150px;
+            width: 150px;
+            margin: 15px;
+        }
+
+        button {
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        .przycikPKM {
+            border-radius: 50%;
+            
+        }
+        .przycikPKM > button > img{
+            height: 200px;width: 200px;border-radius: 50%;
+            background-color: black;
+        }
+        .przycikPKM > button {
+            height: 200px;width: 200px;border-radius: 50%;background-color: black;
+        }
+        .przyciski {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- // kamien https://samequizy.pl/wp-content/uploads/2022/02/06/images_78bb180e25dc1.jpg
+    // papier https://samequizy.pl/wp-content/uploads/2022/02/06/images_f14ab7537699.jpg
+    // nozyce https://samequizy.pl/wp-content/uploads/2022/02/06/images_9dc23e8336d32.jpg -->
+    <div>
+        <h4>Kamień Papier Nożyce</h4>
+        <div class="przyciski">
+            <div class="przycikPKM">
+                <button onclick="playGame('Kamień')"><img src="kamine.webp" alt="kamien"
+                        ></button>
+            </div>
+            <div class="przycikPKM">
+                <button onclick="playGame('Papier')"><img src="papier.webp" alt="papier"
+                        ></button>
+            </div>
+            <div class="przycikPKM">
+                <button onclick="playGame('Nożyce')"><img src="nozyce.webp" alt="nozyczki"
+                        ></button><br>
+            </div>
+        </div>
+        <button onclick="
+        score.wins =0;
+        score.loses =0;
+        score.ties =0;
+        document.querySelector('.wynik').innerHTML = `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+        ">Zresetuj wynik</button>
+        <hr>
+        <div class="wynik-obrazkowy">
+            <img src="nozyce.webp" alt="nozyczki">
+            <img src="papier.webp" alt="papier">
+            <img src="kamine.webp" alt="kamien">
+        </div>
+        <hr>
+        <p class="wynik"></p>
+
+    </div>
+    <script>
+        const score = {
+            wins: 0,
+            loses: 0,
+            ties: 0
+        };
+        let result = '';
+
+        function update() {
+            document.querySelector('.wynik').innerHTML = `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+            document.querySelector('.wynik-obrazki').innerHTML = '<img src="nozyce.webp" alt="nozyczki><img src="papier.webp" alt="papier"><img src="kamine.webp" alt="kamien">'
+        }
+        function playGame(wybor) {
+
+            const random = Math.random();
+            if (random >= 0 && random < 1 / 3) {
+                var los = 'Kamień';
+            }
+            if (random >= 1 / 3 && random < 2 / 3) {
+                var los = 'Papier';
+            }
+            if (random >= 2 / 3 && random < 1) {
+                var los = 'Nożyce';
+            }
+
+
+            if (wybor === 'Nożyce') {
+                if (los == 'Kamień') {
+                    score.loses += 1;
+                    document.querySelector('.wynik').innerHTML = 'Przegrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="nozyce.webp" alt="nozyczki" ><img src="kamine.webp" alt="kamien">';
+
+                }
+                else if (los == 'Papier') {
+                    score.wins += 1;
+                    document.querySelector('.wynik').innerHTML = 'Wygrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="nozyce.webp" alt="nozyczki" ><img src="papier.webp" alt="papier">';
+
+                }
+                else if (los === wybor) {
+                    score.ties += 1;
+                    document.querySelector('.wynik').innerHTML = 'REMIS!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="nozyce.webp" alt="nozyczki" ><img src="nozyce.webp" alt="nozyczki">';
+
+                }
+                return;
+            }
+            if (wybor === 'Kamień') {
+                if (los === 'Nożyce') {
+                    score.wins += 1;
+                    document.querySelector('.wynik').innerHTML = 'Wygrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="kamine.webp" alt="kamien" ><img src="nozyce.webp" alt="nozyczki">';
+
+                }
+                else if (los === 'Papier') {
+                    score.loses += 1;
+                    document.querySelector('.wynik').innerHTML = 'Przegrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="kamine.webp" alt="kamien" ><img src="papier.webp" alt="papier">';
+                }
+                else if (los === wybor) {
+                    score.ties += 1;
+                    document.querySelector('.wynik').innerHTML = 'REMIS!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="kamine.webp" alt="kamien" ><img src="kamine.webp" alt="kamien" >';
+
+
+                }
+                return;
+            }
+            if (wybor === 'Papier') {
+                if (los == 'Kamień') {
+                    score.wins += 1;
+                    document.querySelector('.wynik').innerHTML = 'Wygrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="papier.webp" alt="papier" ><img src="kamine.webp" alt="kamien" >';
+
+                }
+                else if (los == 'Nożyce') {
+                    score.loses += 1;
+                    document.querySelector('.wynik').innerHTML = 'Przegrana!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="papier.webp" alt="papier" ><img src="nozyce.webp" alt="nozyce" >';
+
+
+                }
+                else if (los === wybor) {
+                    score.ties += 1;
+                    document.querySelector('.wynik').innerHTML = 'REMIS!' + `\nWygrane: ${score.wins}, przegrane: ${score.loses}, remisy: ${score.ties}`;
+                    document.querySelector('.wynik-obrazkowy').innerHTML = '<img src="papier.webp" alt="papier" ><img src="papier.webp" alt="papier" >';
+
+
+
+                }
+                return;
+            }
+        }
+        update();
+    </script>
+</body>
+
+</html>
